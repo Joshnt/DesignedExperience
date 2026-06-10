@@ -43,12 +43,14 @@ function draw() {
       drawWidth = height * imgRatio;
     }
 
+    imageMode(CENTER);
+
     image(
       bg,
       (width - drawWidth) / 2,
       (height - drawHeight) / 2,
-      drawWidth,
-      drawHeight
+      drawWidth * 1.25,
+      drawHeight * 1.25
     );
 
 
