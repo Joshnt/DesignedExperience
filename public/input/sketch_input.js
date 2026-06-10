@@ -27,7 +27,12 @@ function setup() {
 
 function draw() {
     background(255); 
-    image(bg, (width - bg.width) / 2, (height - bg.height) / 2);
+
+    
+    imageMode(CENTER);
+    image(bg, (width - bg.width) / 1.75, (height - bg.height) / 1.75);
+
+
     ellipseMode(CENTER,CENTER);
     console.log(allTouches.length);
 
@@ -80,3 +85,7 @@ function showRoomFullPopup(message) {
 document.getElementById("reloadBtn").addEventListener("click", () => {
     location.reload();
 });
+
+function windowResized() {
+  // = ignore rotation 
+}
