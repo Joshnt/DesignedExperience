@@ -49,8 +49,16 @@ function broadcastAll() {
         touches
     });
 
-    io.to("input").emit("touchesUpdate", {
-        touches
+    inputUsers.forEach((socketId) => {
+        const socket = io.sockets.sockets.get(socketId);
+        if (!socket) return;
+
+        const filtered = touches.filter(t => t.id !== socketId);
+
+        socket.emit("touchesUpdate", {
+            count: filtered.length,
+            touches: filtered
+        });
     });
 }
 
