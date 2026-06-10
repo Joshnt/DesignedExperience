@@ -29,7 +29,6 @@ function draw() {
     background(255); 
 
     
-    imageMode(CENTER);
     image(bg, (width - bg.width) / 1.75, (height - bg.height) / 1.75);
 
 
