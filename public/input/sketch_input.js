@@ -28,8 +28,28 @@ function setup() {
 function draw() {
     background(255); 
 
-    
-    image(bg, (width - bg.width) / 1.75, (height - bg.height) / 1.75);
+    let imgRatio = bg.width / bg.height;
+    let canvasRatio = width / height;
+
+    let drawWidth, drawHeight;
+
+    if (canvasRatio > imgRatio) {
+      // Canvas is wider → scale by width
+      drawWidth = width;
+      drawHeight = width / imgRatio;
+    } else {
+      // Canvas is taller → scale by height
+      drawHeight = height;
+      drawWidth = height * imgRatio;
+    }
+
+    image(
+      bg,
+      (width - drawWidth) / 2,
+      (height - drawHeight) / 2,
+      drawWidth,
+      drawHeight
+    );
 
 
     ellipseMode(CENTER,CENTER);
