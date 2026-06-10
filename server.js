@@ -1,5 +1,4 @@
 const express = require('express');
-//const basicAuth = require('express-basic-auth');
 const { createServer } = require('node:http');
 const { join } = require('node:path');
 const { Server } = require('socket.io');
@@ -13,6 +12,10 @@ const io = new Server(server);
 const PORT = process.env.PORT || 3000;
 
 app.use(express.static(join(__dirname, 'public')));
+
+server.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
 
 app.get('/', (req, res) => {
     res.sendFile(join(__dirname, 'public', 'input', 'index.html'));
