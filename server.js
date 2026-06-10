@@ -26,10 +26,6 @@ app.get('/output', (req, res) => {
     res.sendFile(join(__dirname, 'public', 'output', 'index.html'));
   });
 
-// 5. Import and initialize Socket.IO with the created server.
-const socketio = require("socket.io");
-const io = socketio(server);
-
 
 let allTouches = {};      // { socketID: {x, y} }
 let connectionOrder = []; // ordered list of socketIDs by join time
