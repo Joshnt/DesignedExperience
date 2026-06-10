@@ -80,10 +80,14 @@ io.on("connection", (socket) => {
         if (roomName === "input") {
 
             if (inputUsers.size >= MAX_INPUT_USERS) {
-                socket.emit("roomFull", {});
+                socket.emit("roomFull", {
+                    title: "Room Full",
+                    message: "Only 4 input users are allowed at a time."
+                });
                 setTimeout(() => {
                     socket.disconnect(true);
                 }, 500);
+                console.log("room join deny");
                 return;
             }
 

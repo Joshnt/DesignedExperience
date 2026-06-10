@@ -21,7 +21,7 @@ function setup() {
       allTouches = data;
   });
 
-  socket.on("roomFull", () => {
+  socket.on("roomFull", (data) => {
       showRoomFullPopup("Only 4 input users are allowed at a time.");
   });
 }
