@@ -50,7 +50,7 @@ function broadcastAll() {
     });
 
     io.to("input").emit("touchesUpdate", {
-        touches
+        allTouches
     });
 }
 
@@ -84,8 +84,8 @@ io.on("connection", (socket) => {
 
             if (inputUsers.size >= MAX_INPUT_USERS) {
                 socket.emit("roomFull", {
-                    title: "Room Full",
-                    message: "Only 4 input users are allowed at a time."
+                    title: "Too many users",
+                    message: "Only 4 users are allowed at a time."
                 });
                 setTimeout(() => {
                     socket.disconnect(true);

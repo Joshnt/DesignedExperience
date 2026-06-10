@@ -13,7 +13,6 @@ function setup() {
 
   socket.on("connect", () => {
     console.log("Connected");
-
     socket.emit("joinRoom", "input");
   });
 
@@ -29,20 +28,22 @@ function setup() {
 function draw() {
     background(255); 
     image(bg, (width - bg.width) / 2, (height - bg.height) / 2);
+    ellipseMode(CENTER,CENTER);
 
-    Object.keys(allTouches).forEach(key => {
-      console.log(key);            
-      console.log(allTouches[key]); 
+    Object.values(allTouches).forEach(value => {
+      fill(0, 100);
+      strokeWeight(0);
+      ellipse(value.x, value.y, map(width/5, 0, width, width*0.1, width*0.3),  map(width/5, 0, width, width*0.1, width*0.3));
     });
 
   if(touches.length > 0){ 
 
     stroke(255);
     strokeWeight(4);
-    fill(255, map(mouseY, 0, height, 0, 200));
+    fill(255, 100);
     
-    ellipseMode(CENTER,CENTER);
-    ellipse(touches[0].x, touches[0].y, map(width/2, 0, width, width*0.1, width*0.3),  map(width/2, 0, width, width*0.1, width*0.3))
+    
+    ellipse(touches[0].x, touches[0].y, map(width/2, 0, width, width*0.1, width*0.3),  map(width/2, 0, width, width*0.1, width*0.3));
   
     if (touches.length > 0) {
       socket.emit("touches", {
