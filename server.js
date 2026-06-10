@@ -11,6 +11,9 @@ const io = new Server(server);
 
 const PORT = process.env.PORT || 3000;
 
+const MAX_INPUT_USERS = 4;
+const inputUsers = new Set();
+
 app.use(express.static(join(__dirname, 'public')));
 
 server.listen(PORT, () => {
