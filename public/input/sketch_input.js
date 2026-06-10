@@ -21,7 +21,7 @@ function setup() {
   });
 
   socket.on("roomFull", (data) => {
-      showRoomFullPopup("Only 4 input users are allowed at a time.");
+      showRoomFullPopup("Only 4 users are allowed at a time.");
   });
 }
 
@@ -29,6 +29,7 @@ function draw() {
     background(255); 
     image(bg, (width - bg.width) / 2, (height - bg.height) / 2);
     ellipseMode(CENTER,CENTER);
+    console.log(allTouches.length);
 
     Object.values(allTouches).forEach(value => {
       fill(0, 100);
