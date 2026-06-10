@@ -1,30 +1,30 @@
-// Print a startup message on the server console
-console.log("Starting server...");
+const express = require('express');
+//const basicAuth = require('express-basic-auth');
+const { createServer } = require('node:http');
+const { join } = require('node:path');
+const { Server } = require('socket.io');
+const path = require('path');
+const fs = require('fs');
 
-// 1. Import Express and create an application instance.
-const express = require("express");
 const app = express();
+const server = createServer(app);
+const io = new Server(server);
 
-// 2. Define the port using the environment variable (for Render) or default to 3000.
-const port = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
-// 3. Start an HTTP server using the Express app.
-const server = app.listen(port, () => {
-    console.log(`Server listening on port ${port}!`);
-});
+app.use(express.static(join(__dirname, 'public')));
 
-// 4. Set up Express to serve static files from the "public" directory.
-app.use(express.static("public"));
+app.get('/', (req, res) => {
+    res.sendFile(join(__dirname, 'public', 'input', 'index.html'));
+  });
 
-// Route: /controller-a ➝ index-a.html
-app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/public/input/index.html");
-});
+app.get('/input', (req, res) => {
+    res.sendFile(join(__dirname, 'public', 'input', 'index.html'));
+  });
 
-// Route: /controller-b ➝ index-b.html
-app.get("/output", (req, res) => {
-    res.sendFile(__dirname + "/public/output/index.html");
-});
+app.get('/output', (req, res) => {
+    res.sendFile(join(__dirname, 'public', 'output', 'index.html'));
+  });
 
 // 5. Import and initialize Socket.IO with the created server.
 const socketio = require("socket.io");
