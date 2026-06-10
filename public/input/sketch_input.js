@@ -47,8 +47,8 @@ function draw() {
 
     image(
       bg,
-      (width - drawWidth) / 2,
-      (height - drawHeight) / 2,
+      width/2,
+      height/2,
       drawWidth * 1.25,
       drawHeight * 1.25
     );
