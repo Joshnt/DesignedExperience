@@ -46,29 +46,29 @@ function broadcastAll() {
 
 // 6. Listen for new Socket.IO connections.
 io.on("connection", (socket) => {
-    console.log("New client connected: " + socket.id);
+    console.log("New socket connected: " + socket.id);
 
-    connectionOrder.push(client.id);
-    console.log(`Client connected: ${client.id}`);
+    connectionOrder.push(socket.id);
+    console.log(`socket connected: ${socket.id}`);
 
     socket.on("touches", (t) => {
-        allTouches[client.id] = t;
+        allTouches[socket.id] = t;
         broadcastAll();
     });
 
     socket.on("touchEnd", () => {
-        delete allTouches[client.id];
+        delete allTouches[socket.id];
         broadcastAll();
     });
 
     socket.on("disconnect", () => {
-        delete allTouches[client.id];
-        connectionOrder = connectionOrder.filter(id => id !== client.id);
+        delete allTouches[socket.id];
+        connectionOrder = connectionOrder.filter(id => id !== socket.id);
         broadcastAll();
-        console.log(`Client disconnected: ${client.id}`);
+        console.log(`socket disconnected: ${socket.id}`);
     });
 
-    // Listen for a "maxClient" event which signals that this socket is the Max client.
+    // Listen for a "maxsocket" event which signals that this socket is the Max socket.
     socket.on("joinRoom", (roomName) => {
         socket.join(roomName);
         console.log(`Socket ${socket.id} joined room '${roomName}'`);
