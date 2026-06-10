@@ -45,6 +45,10 @@ function broadcastAll() {
         count: touches.length,
         touches
     });
+
+    io.to("input").emit("touchesUpdate", {
+        touches
+    });
 }
 
 // 6. Listen for new Socket.IO connections.
@@ -66,13 +70,26 @@ io.on("connection", (socket) => {
 
     socket.on("disconnect", () => {
         delete allTouches[socket.id];
+        inputUsers.delete(socket.id);
         connectionOrder = connectionOrder.filter(id => id !== socket.id);
         broadcastAll();
         console.log(`socket disconnected: ${socket.id}`);
     });
 
-    // Listen for a "maxsocket" event which signals that this socket is the Max socket.
     socket.on("joinRoom", (roomName) => {
+        if (roomName === "input") {
+
+            if (inputUsers.size >= MAX_INPUT_USERS) {
+                socket.emit("roomFull", {});
+                setTimeout(() => {
+                    socket.disconnect(true);
+                }, 500);
+                return;
+            }
+
+            inputUsers.add(socket.id);
+        }
+
         socket.join(roomName);
         console.log(`Socket ${socket.id} joined room '${roomName}'`);
     });

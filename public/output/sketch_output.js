@@ -8,6 +8,6 @@ socket = io.connect("https://designedexperience.onrender.com");
     socket.emit("joinRoom", "output");
   });
 
-  socket.on("data", (msg) => {
+  socket.on("touchesUpdate", (msg) => {
       console.log("Output room got:", msg);
   });

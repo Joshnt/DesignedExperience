@@ -1,25 +1,19 @@
 const Max = require('max-api');
+const io = require("socket.io-client");
 
 let socket;
 
 socket = io.connect("https://designedexperience.onrender.com");
 
 socket.on("connect", () => {
-console.log("Connected");
 
 socket.emit("joinRoom", "output");
 });
 
 socket.on("touchesUpdate", (data) => {
-    // data = { count, touches }
-
-    post("touches count: " + data.count + "\n");
-
     data.touches.forEach(t => {
-        post(`touch ${t.index}: ${t.x}, ${t.y}\n`);
+        Max.outlet("touch", t.index, t.x, t.y);
     });
 
-    // send to Max outlets
-    outlet(0, data.count);
-    outlet(1, JSON.stringify(data.touches));
+    Max.outlet("count", data.count)
 });

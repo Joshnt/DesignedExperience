@@ -1,5 +1,6 @@
 let socket;
 let isPressed = false;
+let allTouches = {};
 
 function preload() {
   bg = loadImage("/assets/ColorWheel.png"); // fetched from public/assets/
@@ -9,11 +10,30 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
 
   socket = io.connect("https://designedexperience.onrender.com");
+
+  socket.on("connect", () => {
+    console.log("Connected");
+
+    socket.emit("joinRoom", "input");
+  });
+
+  socket.on("touchesUpdate", (data) => {
+      allTouches = data;
+  });
+
+  socket.on("roomFull", () => {
+      showRoomFullPopup("Only 4 input users are allowed at a time.");
+  });
 }
 
 function draw() {
     background(255); 
     image(bg, (width - bg.width) / 2, (height - bg.height) / 2);
+
+    Object.keys(allTouches).forEach(key => {
+      console.log(key);            
+      console.log(allTouches[key]); 
+    });
 
   if(touches.length > 0){ 
 
@@ -47,3 +67,12 @@ function touchStarted(){
 function touchEnded(){
   return false; // Prevent default behavior
 }
+
+function showRoomFullPopup(message) {
+  document.getElementById("popupMessage").textContent = message;
+  document.getElementById("roomFullPopup").style.display = "flex";
+}
+
+document.getElementById("reloadBtn").addEventListener("click", () => {
+    location.reload();
+});
