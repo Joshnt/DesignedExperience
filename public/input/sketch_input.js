@@ -1,6 +1,6 @@
 let socket;
 let isPressed = false;
-let allTouches = {};
+let allTouches = [];
 
 function preload() {
   bg = loadImage("/assets/ColorWheel.png"); // fetched from public/assets/
@@ -17,7 +17,7 @@ function setup() {
   });
 
   socket.on("touchesUpdate", (data) => {
-      allTouches = data;
+      allTouches = data.touches;
   });
 
   socket.on("roomFull", (data) => {
@@ -31,10 +31,16 @@ function draw() {
     ellipseMode(CENTER,CENTER);
     console.log(allTouches.length);
 
-    Object.values(allTouches).forEach(value => {
-      fill(0, 100);
-      strokeWeight(0);
-      ellipse(value.x, value.y, map(width/5, 0, width, width*0.1, width*0.3),  map(width/5, 0, width, width*0.1, width*0.3));
+    allTouches.forEach(touch => {
+        fill(0, 100);
+        noStroke();
+
+        ellipse(
+            touch.x * width,
+            touch.y * height,
+            map(width/5, 0, width, width*0.1, width*0.3),
+            map(width/5, 0, width, width*0.1, width*0.3)
+        );
     });
 
   if(touches.length > 0){ 
@@ -63,10 +69,6 @@ function touchEnded() {
 }
 
 function touchStarted(){
-  return false; // Prevent default behavior
-}
-
-function touchEnded(){
   return false; // Prevent default behavior
 }
 

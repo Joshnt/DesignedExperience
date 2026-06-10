@@ -50,7 +50,7 @@ function broadcastAll() {
     });
 
     io.to("input").emit("touchesUpdate", {
-        allTouches
+        touches
     });
 }
 
