@@ -8,7 +8,7 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
-  socket = io.connect("https://designx-color.onrender.com");
+  socket = io.connect("https://designedexperience.onrender.com");
 }
 
 function draw() {

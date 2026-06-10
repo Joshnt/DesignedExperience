@@ -1,6 +1,6 @@
 let socket;
 
-socket = io.connect("https://designx-color.onrender.com");
+socket = io.connect("https://designedexperience.onrender.com");
 
   socket.on("connect", () => {
     console.log("Connected");
