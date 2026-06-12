@@ -71,19 +71,16 @@ io.on("connection", (socket) => {
 
     socket.on("touches", (t) => {
         allTouches[socket.id] = t;
-        broadcastAll();
     });
 
     socket.on("touchEnd", () => {
         delete allTouches[socket.id];
-        broadcastAll();
     });
 
     socket.on("disconnect", () => {
         delete allTouches[socket.id];
         inputUsers.delete(socket.id);
         connectionOrder = connectionOrder.filter(id => id !== socket.id);
-        broadcastAll();
         console.log(`socket disconnected: ${socket.id}`);
     });
 
@@ -109,3 +106,5 @@ io.on("connection", (socket) => {
         console.log(`Socket ${socket.id} joined room '${roomName}'`);
     });
 });
+
+setInterval(broadcastAll, 20);

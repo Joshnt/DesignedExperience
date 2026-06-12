@@ -23,6 +23,8 @@ function setup() {
   socket.on("roomFull", (data) => {
       showRoomFullPopup("Only 4 users are allowed at a time.");
   });
+
+  frameRate(60); // limit to 60fps for update rate
 }
 
 function draw() {
