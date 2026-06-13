@@ -74,11 +74,11 @@ function draw() {
     allTouches.forEach(touch => {
         fill(0, 100);
         noStroke();
-        let tempX, tempY = mapTouchToCircle(touch.x, touch.y);
+        let temp = mapTouchToCircle(touch.x, touch.y);
 
         ellipse(
-            tempX * width,
-            tempY * height,
+            temp.x * width,
+            temp.y * height,
             map(width/5, 0, width, width*0.1, width*0.3),
             map(width/5, 0, width, width*0.1, width*0.3)
         );
@@ -95,11 +95,12 @@ function draw() {
   
     if (touches.length > 0) {
 
-      let xNew, yNew = mapTouchToCircle(touches[0].x, touches[0].y)
+      let newPos= mapTouchToCircle(touches[0].x, touches[0].y);
+      console.log(xNew, yNew);
 
       socket.emit("touches", {
-        x: xNew,
-        y: yNew
+        x: newPos.x,
+        y: newPos.y
       });
     }
   }
