@@ -21,7 +21,7 @@ server.listen(PORT, () => {
   });
 
 app.get('/', (req, res) => {
-    res.sendFile(join(__dirname, 'public', 'input', 'index.html'));
+    res.sendFile(join(__dirname, 'public', 'StartPage', 'index.html'));
   });
 
 app.get('/input', (req, res) => {
