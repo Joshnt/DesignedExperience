@@ -3,10 +3,10 @@ let isPressed = false;
 let allTouches = [];
 
 // Define circle from your layout
-const cx = width / 2;
-const cy = width / 2;
-const padding = 40;
-const r = width / 2 - padding; // your left-to-right circle
+let cx;
+let cy;
+let padding;
+let r;
 
 
 function mapTouchToCircle(tx, ty) {
@@ -49,6 +49,11 @@ function setup() {
   socket.on("roomFull", (data) => {
       showRoomFullPopup("Only 4 users are allowed at a time.");
   });
+
+  cx = width / 2;
+  cy = width / 2;
+  padding = 40;
+  r = width / 2 - padding; // your left-to-right circle
 
   frameRate(60); // limit to 60fps for update rate
 }
