@@ -54,15 +54,14 @@ function setup() {
 }
 
 function draw() {
-    background(255); 
-
     imageMode(CENTER);
-    let scale = min(width / img.width, height / img.height);
-    let w = img.width * scale;
-    let h = img.height * scale;
+
+    let scale = max(width / bg.width, height / bg.height);
+    let w = bg.width * scale;
+    let h = bg.height * scale;
     
     imageMode(CENTER);
-    image(img, width / 2, height / 2, w, h)
+    image(bg, width / 2, height / 2, w, h);
 
     ellipseMode(CENTER,CENTER);
     console.log(allTouches.length);
