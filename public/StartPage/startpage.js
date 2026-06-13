@@ -14,11 +14,12 @@ function draw() {
     background(255); 
     imageMode(CENTER);
 
-    image(
-      bg,
-      width/2,
-      height/2
-    );
+    let scale = min(width / img.width, height / img.height);
+    let w = img.width * scale;
+    let h = img.height * scale;
+    
+    imageMode(CENTER);
+    image(img, width / 2, height / 2, w, h);
 }
 
 function touchEnded() {

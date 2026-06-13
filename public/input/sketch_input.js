@@ -56,29 +56,13 @@ function setup() {
 function draw() {
     background(255); 
 
-    let imgRatio = bg.width / bg.height;
-    let canvasRatio = width / height;
-
-    let drawWidth, drawHeight;
-
-    if (canvasRatio > imgRatio) {
-      // Canvas is wider → scale by width
-      drawWidth = width;
-      drawHeight = width / imgRatio;
-    } else {
-      // Canvas is taller → scale by height
-      drawHeight = height;
-      drawWidth = height * imgRatio;
-    }
-
     imageMode(CENTER);
-
-    image(
-      bg,
-      width/2,
-      height/2
-    );
-
+    let scale = min(width / img.width, height / img.height);
+    let w = img.width * scale;
+    let h = img.height * scale;
+    
+    imageMode(CENTER);
+    image(img, width / 2, height / 2, w, h)
 
     ellipseMode(CENTER,CENTER);
     console.log(allTouches.length);
