@@ -96,7 +96,6 @@ function draw() {
     if (touches.length > 0) {
 
       let newPos= mapTouchToCircle(touches[0].x, touches[0].y);
-      console.log(xNew, yNew);
 
       socket.emit("touches", {
         x: newPos.x,
