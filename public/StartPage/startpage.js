@@ -26,7 +26,7 @@ function touchEnded() {
 }
 
 function touchStarted(){
-  window.location.href = "https://designedexperience.onrender.com/input";
+  window.location.href = "https://designedexperience.onrender.com/input/index.html";
   return false; // Prevent default behavior
 }
 
