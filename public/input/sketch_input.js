@@ -51,8 +51,8 @@ function setup() {
   });
 
   cx = width / 2;
-  cy = width / 2;
-  padding = 40;
+  cy = height / 2;
+  padding = 0;
   r = width / 2 - padding; // your left-to-right circle
 
   frameRate(60); // limit to 60fps for update rate
