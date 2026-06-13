@@ -1,6 +1,7 @@
 let socket;
 let isPressed = false;
 let allTouches = [];
+let selectSound;
 
 // Define circle from your layout
 let cx;
@@ -30,6 +31,7 @@ function mapTouchToCircle(tx, ty) {
 
 function preload() {
   bg = loadImage("/assets/COLOR WHEEL copy.jpg"); // fetched from public/assets/
+  selectSound = loadSound('/assets/select.wav');
 }
 
 function setup() {
@@ -113,6 +115,8 @@ function touchEnded() {
 }
 
 function touchStarted(){
+  if (touches.length === 0)
+    selectSound.play();
   return false; // Prevent default behavior
 }
 
