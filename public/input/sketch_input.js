@@ -74,10 +74,11 @@ function draw() {
     allTouches.forEach(touch => {
         fill(0, 100);
         noStroke();
+        let tempX, tempY = mapTouchToCircle(touch.x, touch.y);
 
         ellipse(
-            touch.x * width,
-            touch.y * height,
+            tempX * width,
+            tempY * height,
             map(width/5, 0, width, width*0.1, width*0.3),
             map(width/5, 0, width, width*0.1, width*0.3)
         );
